@@ -56,4 +56,45 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ---
 
-Made with ♥ by João Pedro Schmitz
+
+const titles = [
+...document.querySelectorAll(`[class^="products_productsBlockTitle"]`),
+].map((elem) => elem.innerText);
+const positionNames = [
+...document.querySelectorAll(
+`[class^="position_nameAndDescriptionWrapper"] [class^="position_name"]`,
+),
+].map((elem) => elem.innerText);
+const positionDescriptions = [
+...document.querySelectorAll(
+`[class^="position_nameAndDescriptionWrapper"] [class^="position_description"]`,
+),
+].map((elem) => elem.innerText);
+const photos = [
+...document.querySelectorAll(
+`[class^="position_photoContainer"] [class^="position_photo"]`,
+),
+].map((elem) => elem.src);
+const categoryIds = [
+...document.querySelectorAll(`[class^="products_categoryAnchor"]`),
+].map((elem) => elem.id);
+
+const prices = [
+...document.querySelectorAll(
+`[class^="position_priceBlock"] [class^="position_price"]`,
+),
+].map((elem) => elem.innerText.slice(0, 3));
+
+const items = positionNames.map((positionName, index) => ({
+name: positionName,
+description: positionDescriptions[index],
+price: +prices[index],
+src: photos[index],
+}));
+
+const data = titles.map((categoryTitle, i) => ({
+name: categoryTitle,
+items: items.slice(i * 4, (i + 1) * 4),
+id: categoryIds[i],
+}));
+JSON.stringify(data);
