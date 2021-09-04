@@ -1,0 +1,31 @@
+.badge {
+  padding: 0.2em 0.7em;
+  border: 2px solid #E1E1E1;
+  border-radius: 20px;
+}
+
+.badge:hover{
+  border: 2px solid #B8B8B8;
+}
+
+.badge + .badge {
+  margin-left: .5em;
+}
+
+.badgeList {
+  padding: 0;
+  display: flex;
+  list-style: none;
+}
+
+.badgeWrapper {
+  background: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.badgeActive {
+  border: 1px solid black;
+}
