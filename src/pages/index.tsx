@@ -1,10 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import useSWR from 'swr';
 
-import { useMemo } from 'react';
 import MenuItems from '@/components/MenuItems';
-import getMenu from './api/getMenu';
+import BadgeList from '@/components/CategoryBadge';
 
 const menuFetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -12,7 +10,6 @@ export default function Home() {
   const { data: menuItems, error } = useSWR(`/api/getMenu`, menuFetcher);
   if (error) return `An error has occurred: ${error}`;
   if (!menuItems) return `Loading...`;
-  console.log(menuItems);
   return (
     <div>
       <Head>
@@ -25,6 +22,7 @@ export default function Home() {
       </Head>
 
       <main className="layout_layoutContainer">
+        <BadgeList menu={menuItems} />
         <MenuItems menu={menuItems} />
       </main>
 
